@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { Settings, User, Languages, Palette, X, Check, Zap, Table, CheckCircle2, LogOut } from 'lucide-react'
+import { Settings, User, Languages, Palette, X, Check, Zap, Table, CheckCircle2, LogOut, QrCode, Smartphone } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useAuth } from '../context/AuthContext'
+import QrModal from './QrModal'
 
 export default function SettingsModal({ isOpen, onClose }) {
   const { theme, setTheme, lang, setLang, driver, setDriver, allDrivers, t } = useApp()
   const { logout } = useAuth()
   const [driverInput, setDriverInput] = useState(driver)
   const [savedSuccess, setSavedSuccess] = useState(false)
+  const [qrModalOpen, setQrModalOpen] = useState(false)
 
   if (!isOpen) return null
 
@@ -204,6 +206,54 @@ export default function SettingsModal({ isOpen, onClose }) {
               </button>
             </div>
           </div>
+
+          {/* 4. Open on Mobile (QR Code) */}
+          <div className={`p-4 rounded-xl border ${isExcel ? 'bg-white border-slate-400' : 'bg-slate-900/80 border-slate-800'}`}>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider opacity-80 mb-2.5">
+              <QrCode size={15} className={isExcel ? 'text-emerald-700' : 'text-cyan-400'} />
+              <span>{t('openOnMobile')}</span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setQrModalOpen(true)}
+              className={`w-full text-left p-3.5 rounded-xl border transition flex items-center justify-between gap-3 cursor-pointer ${
+                isExcel
+                  ? 'bg-[#ece9d8] text-slate-800 border-slate-400 hover:bg-[#dfdbca]'
+                  : 'bg-slate-950/80 border-cyan-500/30 text-white hover:border-cyan-400 hover:shadow-[0_0_18px_rgba(6,182,212,0.25)]'
+              }`}
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div
+                  className={`p-2 rounded-lg shrink-0 ${
+                    isExcel
+                      ? 'bg-emerald-800 text-white'
+                      : 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 shadow-[0_0_10px_rgba(6,182,212,0.35)]'
+                  }`}
+                >
+                  <Smartphone size={18} />
+                </div>
+                <div className="min-w-0">
+                  <div className="font-bold text-sm text-cyan-300 flex items-center gap-1.5">
+                    <span>📱 {t('openOnMobile')}</span>
+                  </div>
+                  <p className="text-xs opacity-70 mt-0.5 truncate">
+                    {t('openOnMobileDesc')}
+                  </p>
+                </div>
+              </div>
+
+              <span
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 transition ${
+                  isExcel
+                    ? 'bg-emerald-800 text-white'
+                    : 'bg-cyan-500 text-slate-950 shadow-[0_0_10px_rgba(6,182,212,0.4)]'
+                }`}
+              >
+                QR Code
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Footer Buttons */}
@@ -232,6 +282,9 @@ export default function SettingsModal({ isOpen, onClose }) {
           </button>
         </div>
       </div>
+
+      {/* Mobile QR Scanner Modal */}
+      <QrModal isOpen={qrModalOpen} onClose={() => setQrModalOpen(false)} />
     </div>
   )
 }

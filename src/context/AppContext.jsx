@@ -22,6 +22,8 @@ const TRANSLATIONS = {
     themeNeonDesc: 'Low-light optimized with electric cyan glow',
     themeExcel: 'Retro Excel (Classic 1997)',
     themeExcelDesc: 'Vintage spreadsheet with classic gridlines & formula bar',
+    openOnMobile: 'Open on Mobile (QR Code)',
+    openOnMobileDesc: 'Scan with your phone camera to open on mobile',
     close: 'Close',
     save: 'Save',
 
@@ -90,6 +92,8 @@ const TRANSLATIONS = {
     themeNeonDesc: 'Otimizado para baixa luminosidade com brilho ciano',
     themeExcel: 'Retro Excel (Clássico 1997)',
     themeExcelDesc: 'Folha de cálculo vintage com grelha e barra de fórmulas',
+    openOnMobile: 'Abrir no Telemóvel (Código QR)',
+    openOnMobileDesc: 'Aponte a câmara do telemóvel para abrir o VanShift',
     close: 'Fechar',
     save: 'Guardar',
 

@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { Truck, BarChart3, Settings, QrCode, LogOut, Shield } from 'lucide-react'
+import { Truck, BarChart3, Settings, LogOut, Shield } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useAuth } from '../context/AuthContext'
 import SettingsModal from './SettingsModal'
-import QrModal from './QrModal'
 
 export default function Navbar({ activeTab, onTabChange }) {
   const { theme, t, driver } = useApp()
@@ -71,9 +70,6 @@ export default function Navbar({ activeTab, onTabChange }) {
                   {m}
                 </span>
               ))}
-            </div>
-            <div className="flex items-center gap-2">
-              <QrModal />
             </div>
           </div>
 
@@ -201,8 +197,6 @@ export default function Navbar({ activeTab, onTabChange }) {
               <span>{t('admin')}</span>
             </button>
           </nav>
-
-          <QrModal />
 
           {/* Settings Gear Button */}
           <button
